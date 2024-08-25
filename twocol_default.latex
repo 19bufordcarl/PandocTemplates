@@ -1,0 +1,58 @@
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{array} 
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{xtab}
+\usepackage{longtable}
+\geometry{letterpaper, margin=1in}
+\setlength{\columnsep}{1cm}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\setlength{\parindent}{0pt}
+
+$if(tables)$
+\usepackage{tabularray}
+\let\longtable\longtblr
+\let\endlongtable\endlongtblr
+\NewTblrTheme{headless}{
+    \DefTblrTemplate{contfoot-text}{default}{}
+    \DefTblrTemplate{conthead-text}{default}{}
+    \DefTblrTemplate{caption}{default}{}
+    \DefTblrTemplate{conthead}{default}{}
+    \DefTblrTemplate{capcont}{default}{}
+}
+\SetTblrOuter[longtblr]{
+    entry=none,
+    label=none,
+    theme=headless,
+}
+\let\noalign\empty
+\def\endlastfoot{\hspace{-2.5mm}} % compensate whitespace produced by left over \empty tokens
+\let\endhead\empty
+\def\toprule{\hspace{-1mm}} % compensate whitespace produced by left over \empty tokens
+\let\midrule\empty
+\let\bottomrule\empty
+\let\color\empty
+% add some optional styling
+\UseTblrLibrary{varwidth}
+\SetTblrInner[longtblr]{
+  hline{1,Z} = {0.3mm},
+  hline{2}   = {0.1mm},
+  row{Z}     = {valign=f},
+  hspan      = minimal,
+  columns    = {co=1,valign=t},
+}
+$endif$
+
+\begin{document}
+
+\twocolumn
+
+$body$
+
+\end{document}
